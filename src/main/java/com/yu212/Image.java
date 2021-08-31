@@ -45,6 +45,26 @@ public class Image {
         ImageIO.write(image, "png", Path.of("src/main/resources").resolve(name + ".png").toFile());
     }
 
+    public Image[][] split(int sw, int sh) throws IOException {
+        Image[][] result = new Image[sh][sw];
+        for (int i = 0; i < sh; i++) {
+            for (int j = 0; j < sw; j++) {
+                result[i][j] = subImage(j * width / sw, i * height / sh, width / sw, height / sh);
+            }
+        }
+        return result;
+    }
+
+    public Image subImage(int sx, int sy, int sw, int sh) {
+        Color[][] subImage = new Color[sh][sw];
+        for (int i = 0; i < sh; i++) {
+            for (int j = 0; j < sw; j++) {
+                subImage[i][j] = colors[i + sy][j + sx];
+            }
+        }
+        return new Image(subImage);
+    }
+
     public void saveForTwitter(String name) throws IOException {
         BufferedImage convertedImage = convertForTwitter();
         ImageIO.write(convertedImage, "png", Path.of("src/main/resources").resolve(name + ".png").toFile());
