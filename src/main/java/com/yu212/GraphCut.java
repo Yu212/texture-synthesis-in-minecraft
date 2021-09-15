@@ -2,13 +2,13 @@ package com.yu212;
 
 import java.util.Arrays;
 
-public class ImageQuilting {
+public class GraphCut {
     private final int inputWidth;
     private final int inputHeight;
     private final Color[][] input;
     private final int overlap;
 
-    public ImageQuilting(Image input, int overlap) {
+    public GraphCut(Image input, int overlap) {
         this.input = input.getColors();
         this.inputWidth = input.width;
         this.inputHeight = input.height;

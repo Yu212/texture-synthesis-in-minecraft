@@ -6,11 +6,11 @@ import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String id = "grass_block_top";
-        int kernelSize = 5;
+        String id = "stone";
+        int kernelSize = 3;
         Image generated = new TextureSynthesis(loadImage(id), 80, 80, kernelSize).synthesize();
-        Image quilted = new ImageQuilting(generated, 8).compute();
-        Image[][] splitted = quilted.split(4, 4);
+        Image computed = new GraphCut(generated, 8).compute();
+        Image[][] splitted = computed.split(4, 4);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 splitted[i][j].save(String.format("%s/%d", id, i * 4 + j));
